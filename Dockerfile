@@ -17,15 +17,15 @@ RUN mkdir /var/run/mysqld && \
     mysqld --initialize-insecure --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data --init_file=/tmp/init.sql
 # RUN docker pull postgres:11.5 \
 #     docker run --name postgres -e POSTGRES_PASSWORD=supreme -d postgres:11.5
-RUN sudo apt-get install wget ca-certificates \
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - \
-    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
-    sudo apt-get update \
-    sudo apt-get install postgresql postgresql-contrib \
-    sudo su - postgres \
+RUN apt-get install wget ca-certificates \
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+    sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
+    apt-get update \
+    apt-get install postgresql postgresql-contrib \
+    su - postgres \
     psql \
     CREATE ROLE postgres WITH LOGIN CREATEDB ENCRYPTED PASSWORD 'supreme'; \
-    \\q
+    \q
 COPY ./*.sh ./app/
 
 RUN chmod +x ./app/*.sh
