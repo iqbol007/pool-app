@@ -9,12 +9,12 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get install -y --no-install-recommends mysql-server mysql-client netcat
 
 COPY ./init.sql /tmp/init.sql
-RUN mkdir /var/run/mysqld && \
-    chown mysql:mysql /var/run/mysqld && \
-    mkdir -p /opt/mysql/mysql/data && \
-    chown -R mysql:mysql /opt/mysql/mysql && \
-    chmod 750 /opt/mysql/mysql/data && \
-    mysqld --initialize-insecure --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data --init_file=/tmp/init.sql
+# RUN mkdir /var/run/mysqld && \
+#     chown mysql:mysql /var/run/mysqld && \
+#     mkdir -p /opt/mysql/mysql/data && \
+#     chown -R mysql:mysql /opt/mysql/mysql && \
+#     chmod 750 /opt/mysql/mysql/data && \
+#     mysqld --initialize-insecure --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data --init_file=/tmp/init.sql
 # RUN docker pull postgres:11.5 \
 #     docker run --name postgres -e POSTGRES_PASSWORD=supreme -d postgres:11.5
 RUN -d \
