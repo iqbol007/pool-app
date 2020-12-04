@@ -16,6 +16,7 @@ RUN mkdir /var/run/mysqld && \
     chmod 750 /opt/mysql/mysql/data && \
     mysqld --initialize-insecure --user=mysql --basedir=/opt/mysql/mysql --datadir=/opt/mysql/mysql/data --init_file=/tmp/init.sql
 RUN apt-get update && apt-get install -y postgresql-client
+RUN curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 COPY ./*.sh ./app/
 
 RUN chmod +x ./app/*.sh
